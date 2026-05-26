@@ -8,6 +8,8 @@ Está orientada a desarrolladores que conocen la terminal y han trabajado con No
 
 ## Contenido
 
+La guía completa está en **[vps.pdf](./vps.pdf)**. Cubre los siguientes capítulos:
+
 | # | Capítulo | Qué cubre |
 |---|----------|-----------|
 | 01 | Presentación | Para quién es la guía y cómo seguirla |
