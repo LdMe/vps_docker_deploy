@@ -1,0 +1,39 @@
+services:
+  backend:
+    build:
+    context: .
+    dockerfile: Dockerfile
+    expose:
+      - "3000"  
+    environment:
+      - VIRTUAL_HOST=<api.midominio.com>
+      - LETSENCRYPT_HOST=<api.midominio.com>
+      - LETSENCRYPT_EMAIL=<tu-email@ejemplo.com>
+    networks:
+      - proxy
+      - internal
+    restart: unless-stopped
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=<password-root-largo>
+      - MYSQL_DATABASE=<miapp>
+      - MYSQL_USER=<miapp_user>
+      - MYSQL_PASSWORD=<la-misma-que-DB_PASSWORD-del-.env>
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - internal
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+  
+networks:
+  proxy:
+    name: nginx-proxy
+    external: true
+  internal:
+    driver: bridge
